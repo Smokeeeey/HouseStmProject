@@ -64,23 +64,46 @@ void game_init()
 void playGame()
 {
 
+	/*
 	//Read the buttons
-	if (debounce_button(bouton1_GPIO_Port, bouton1_Pin))
+	if (debounce_button(button1_GPIO_Port, button1_Pin))
 	{
 		buttonPressed[1] = 1;
 		nbreButtonPressed++;
 	}
-	if (debounce_button(bouton2_GPIO_Port, bouton2_Pin))
+	if (debounce_button(button2_GPIO_Port, button2_Pin))
 	{
 		buttonPressed[2] = 1;
 		nbreButtonPressed++;
 	}
-	if (debounce_button(bouton3_GPIO_Port, bouton3_Pin))
+	if (debounce_button(button3_GPIO_Port, button3_Pin))
 	{
 		buttonPressed[3] = 1;
 		nbreButtonPressed++;
 	}
-	if (debounce_button(bouton4_GPIO_Port, bouton4_Pin))
+	if (debounce_button(button4_GPIO_Port, button4_Pin))
+	{
+		buttonPressed[4] = 1;
+		nbreButtonPressed++;
+	}
+	*/
+
+	if (HAL_GPIO_ReadPin(button1_GPIO_Port, button1_Pin))
+	{
+		buttonPressed[1] = 1;
+		nbreButtonPressed++;
+	}
+	if (HAL_GPIO_ReadPin(button2_GPIO_Port, button2_Pin))
+	{
+		buttonPressed[2] = 1;
+		nbreButtonPressed++;
+	}
+	if (HAL_GPIO_ReadPin(button3_GPIO_Port, button3_Pin))
+	{
+		buttonPressed[3] = 1;
+		nbreButtonPressed++;
+	}
+	if (HAL_GPIO_ReadPin(button4_GPIO_Port, button4_Pin))
 	{
 		buttonPressed[4] = 1;
 		nbreButtonPressed++;
@@ -100,13 +123,23 @@ void playGame()
 				//Start the game
 				if (!gameIsStart)
 				{
+				    // Reset les boutons qui ont servi à démarrer
+				    for (int j = 0; j < 5; j++)
+				    {
+				        buttonPressed[j] = 0;
+				    }
+
+				    nbreButtonPressed = 0;
+
 					ssd1306_Fill(Black);
 
 					ssd1306_SetCursor(10, 5);
 					ssd1306_WriteString("Memory Game", Font_7x10, White);
 
-					sequenceLed();
+
 					gameIsStart = true;
+
+					sequenceLed();
 				}
 				else
 				{
@@ -154,28 +187,28 @@ void sequenceLed()
 {
 	for (int i = 0; i <= score; i++)
 	{
-		HAL_Delay(200);
+		HAL_Delay(500);
 
 		switch (memory[i])
 		{
 			case 1:
 				HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
-				HAL_Delay(300);
+				HAL_Delay(700);
 				HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
 				break;
 			case 2:
 				HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_RESET);
-				HAL_Delay(300);
+				HAL_Delay(700);
 				HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
 				break;
 			case 3:
 				HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
-				HAL_Delay(300);
+				HAL_Delay(700);
 				HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
 				break;
 			case 4:
 				HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
-				HAL_Delay(300);
+				HAL_Delay(700);
 				HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
 				break;
 
@@ -200,21 +233,21 @@ void correctAnswer()
 	HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
 
-	HAL_Delay(200);
+	HAL_Delay(500);
 
 	HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
 
-	HAL_Delay(200);
+	HAL_Delay(500);
 
 	HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
 
-	HAL_Delay(200);
+	HAL_Delay(500);
 
 	HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
@@ -234,6 +267,8 @@ void wrongAnswer()
 	ssd1306_WriteString("Perdu looser !", Font_7x10, White);
 
 	ssd1306_UpdateScreen();
+
+	HAL_Delay(2000);
 
 	//Restart the game
 	game_init();

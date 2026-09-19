@@ -59,14 +59,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define bouton4_Pin GPIO_PIN_0
-#define bouton4_GPIO_Port GPIOA
-#define bouton2_Pin GPIO_PIN_1
-#define bouton2_GPIO_Port GPIOA
-#define bouton3_Pin GPIO_PIN_2
-#define bouton3_GPIO_Port GPIOA
-#define bouton1_Pin GPIO_PIN_3
-#define bouton1_GPIO_Port GPIOA
+#define button4_Pin GPIO_PIN_0
+#define button4_GPIO_Port GPIOA
+#define button2_Pin GPIO_PIN_1
+#define button2_GPIO_Port GPIOA
+#define button3_Pin GPIO_PIN_4
+#define button3_GPIO_Port GPIOA
+#define button1_Pin GPIO_PIN_0
+#define button1_GPIO_Port GPIOB
 #define led1_Pin GPIO_PIN_10
 #define led1_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13

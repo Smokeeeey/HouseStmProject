@@ -18,12 +18,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "game.h"
-#include "ssd1306.h"
-#include "ssd1306_fonts.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
+#include "ssd1306.h"
+#include "ssd1306_fonts.h"
+#include "game.h"
 
 /* USER CODE END Includes */
 
@@ -120,6 +121,49 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
 	  playGame();
+
+	  /* Test direct des boutons
+
+	    //1
+		if (HAL_GPIO_ReadPin(button1_GPIO_Port, button1_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
+		}
+		else
+		{
+			HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
+		}
+
+		//2
+		if (HAL_GPIO_ReadPin(button2_GPIO_Port, button2_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_RESET);
+		}
+		else
+		{
+			HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
+		}
+
+		//3
+		if (HAL_GPIO_ReadPin(button3_GPIO_Port, button3_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
+		}
+		else
+		{
+			HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
+		}
+
+		//4
+		if (HAL_GPIO_ReadPin(button4_GPIO_Port, button4_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
+		}
+		else
+		{
+			HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
+		}
+		*/
 
 
 
@@ -232,17 +276,17 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : bouton4_Pin */
-  GPIO_InitStruct.Pin = bouton4_Pin;
+  /*Configure GPIO pins : button4_Pin button2_Pin button3_Pin */
+  GPIO_InitStruct.Pin = button4_Pin|button2_Pin|button3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(bouton4_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : bouton2_Pin bouton3_Pin bouton1_Pin PA4 */
-  GPIO_InitStruct.Pin = bouton2_Pin|bouton3_Pin|bouton1_Pin|GPIO_PIN_4;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : button1_Pin */
+  GPIO_InitStruct.Pin = button1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(button1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB10 led2_Pin led4_Pin led3_Pin */
   GPIO_InitStruct.Pin = GPIO_PIN_10|led2_Pin|led4_Pin|led3_Pin;

@@ -8,8 +8,10 @@
 #include "debounce_button.h"
 
 static uint32_t lastDebounceTime = 0;
-static GPIO_PinState lastState = GPIO_PIN_RESET;
-static GPIO_PinState stableState = GPIO_PIN_RESET;
+static GPIO_PinState lastState = GPIO_PIN_SET;
+static GPIO_PinState stableState = GPIO_PIN_SET;
+
+// ==== !!! Pull down logiciel !!! ======
 
 bool debounce_button(GPIO_TypeDef *BUTTON_GPIO_Port, uint16_t BUTTON_Pin)
 {
@@ -30,7 +32,7 @@ bool debounce_button(GPIO_TypeDef *BUTTON_GPIO_Port, uint16_t BUTTON_Pin)
 		  stableState = currentState;
 
 		  // Bouton appuyé
-		  if (stableState == GPIO_PIN_SET)
+		  if (stableState == GPIO_PIN_RESET)
 		  {
 			  return true;
 		  }
