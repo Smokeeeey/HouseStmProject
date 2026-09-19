@@ -18,6 +18,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "game.h"
+#include "ssd1306.h"
+#include "ssd1306_fonts.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -45,9 +48,6 @@
 I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN PV */
-
-int count = 0;
-char text[20];
 
 
 /* USER CODE END PV */
@@ -99,7 +99,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   ssd1306_Init();
-  DisplayCounter(count);
+  game_init();
 
 
   /* USER CODE END 2 */
@@ -119,12 +119,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	    if (debounce_button(GPIOA, GPIO_PIN_0))
-	    {
-	        count++;
-	        DisplayCounter(count);
-
-	    }
+	  playGame();
 
 
 

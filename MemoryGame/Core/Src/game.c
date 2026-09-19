@@ -21,7 +21,7 @@ int nbreButtonPressed;
 int score = 0;
 bool gameIsStart = false;
 char text[20];
-
+int currentSequence = 0;
 
 
 
@@ -47,7 +47,7 @@ void game_init()
 
 
 	//----------- Write on screen -----------
-	sprintf(text, "%d", score);
+	sprintf(text, "Score: %d", score);
 
 	ssd1306_Fill(Black);
 
@@ -55,7 +55,7 @@ void game_init()
 	ssd1306_WriteString("Press btn to start !", Font_7x10, White);
 
 	ssd1306_SetCursor(10, 25);
-	ssd1306_WriteString("Score:" + text, Font_7x10, White);
+	ssd1306_WriteString(text, Font_7x10, White);
 
 	ssd1306_UpdateScreen();
 
@@ -111,12 +111,22 @@ void playGame()
 				else
 				{
 					//Use the pressed button
-					if (buttonPressed[i] = 1)
+					if (buttonPressed[i] == 1)
 					{
 						//Correct answer
-						if (buttonPressed[i] = memory[score])
+						if (i == memory[currentSequence])
 						{
-							correctAnswer();
+							currentSequence++;
+
+							if (currentSequence > score)
+							{
+								currentSequence = 0;
+								correctAnswer();
+							}
+						}
+						else
+						{
+							wrongAnswer();
 						}
 					}
 				}
@@ -135,6 +145,8 @@ void playGame()
 			break;
 	}
 
+	nbreButtonPressed = 0;
+
 
 }
 
@@ -142,7 +154,9 @@ void sequenceLed()
 {
 	for (int i = 0; i <= score; i++)
 	{
-		switch (i)
+		HAL_Delay(200);
+
+		switch (memory[i])
 		{
 			case 1:
 				HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
@@ -173,10 +187,43 @@ void correctAnswer()
 {
 	score++;
 
+	sprintf(text, "Score: %d", score);
+
 	ssd1306_SetCursor(10, 25);
-	ssd1306_WriteString("Score:" + text, Font_7x10, White);
+	ssd1306_WriteString(text, Font_7x10, White);
 
 	ssd1306_UpdateScreen();
+
+	//----------- Blink the led -----------
+	HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
+
+	HAL_Delay(200);
+
+	HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
+
+	HAL_Delay(200);
+
+	HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
+
+	HAL_Delay(200);
+
+	HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
+
+	//Relance une sequence
+	sequenceLed();
+
 }
 
 void wrongAnswer()

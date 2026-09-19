@@ -1,2 +1,6 @@
-../Core/Src/game.c:26:6:game_init	8	static
-../Core/Src/game.c:36:5:random_1_4	8	static
+../Core/Src/game.c:34:6:game_init	24	static
+../Core/Src/game.c:64:6:playGame	24	static
+../Core/Src/game.c:153:6:sequenceLed	16	static
+../Core/Src/game.c:186:6:correctAnswer	16	static
+../Core/Src/game.c:229:6:wrongAnswer	16	static
+../Core/Src/game.c:245:5:random_1_4	8	static

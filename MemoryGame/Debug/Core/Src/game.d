@@ -27,7 +27,9 @@ Core/Src/game.o: ../Core/Src/game.c ../Core/Inc/game.h ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.h \
- ../Core/Inc/debounce_button.h ../Core/Inc/main.h
+ ../Core/Inc/debounce_button.h ../Core/Inc/main.h ../Core/Inc/ssd1306.h \
+ ../Core/Inc/ssd1306_conf.h ../Core/Inc/ssd1306_fonts.h \
+ ../Core/Inc/ssd1306.h
 ../Core/Inc/game.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -60,3 +62,7 @@ Core/Src/game.o: ../Core/Src/game.c ../Core/Inc/game.h ../Core/Inc/main.h \
 ../Drivers/BSP/STM32F4xx-Nucleo/stm32f4xx_nucleo.h:
 ../Core/Inc/debounce_button.h:
 ../Core/Inc/main.h:
+../Core/Inc/ssd1306.h:
+../Core/Inc/ssd1306_conf.h:
+../Core/Inc/ssd1306_fonts.h:
+../Core/Inc/ssd1306.h:

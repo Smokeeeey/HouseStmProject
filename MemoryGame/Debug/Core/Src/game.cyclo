@@ -1,2 +1,6 @@
-../Core/Src/game.c:26:6:game_init	1
-../Core/Src/game.c:36:5:random_1_4	1
+../Core/Src/game.c:34:6:game_init	2
+../Core/Src/game.c:64:6:playGame	13
+../Core/Src/game.c:153:6:sequenceLed	6
+../Core/Src/game.c:186:6:correctAnswer	1
+../Core/Src/game.c:229:6:wrongAnswer	1
+../Core/Src/game.c:245:5:random_1_4	1

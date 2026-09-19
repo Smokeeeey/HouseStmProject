@@ -13,6 +13,7 @@ void game_init();
 void sequenceLed();
 void correctAnswer();
 void wrongAnswer();
+void playGame();
 
 
 #endif /* INC_GAME_H_ */
