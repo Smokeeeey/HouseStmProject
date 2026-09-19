@@ -1,0 +1,2 @@
+../Core/Src/game.c:26:6:game_init	8	static
+../Core/Src/game.c:36:5:random_1_4	8	static
