@@ -1,6 +1,5 @@
-../Core/Src/game.c:34:6:game_init	24	static
-../Core/Src/game.c:64:6:playGame	32	static
-../Core/Src/game.c:186:6:sequenceLed	16	static
-../Core/Src/game.c:219:6:correctAnswer	16	static
-../Core/Src/game.c:262:6:wrongAnswer	16	static
-../Core/Src/game.c:280:5:random_1_4	8	static
+../Core/Src/game.c:32:6:game_init	24	static
+../Core/Src/game.c:65:6:playGame	4	static
+../Core/Src/game.c:72:6:correctAnswer	4	static
+../Core/Src/game.c:78:6:wrongAnswer	4	static
+../Core/Src/game.c:85:5:random_1_4	8	static
