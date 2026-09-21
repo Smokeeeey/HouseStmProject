@@ -125,11 +125,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  //playGame();
-
-	  btn1 = HAL_GPIO_ReadPin(button1_GPIO_Port, button1_Pin);
-	  btn2 = HAL_GPIO_ReadPin(button2_GPIO_Port, button2_Pin);
-	  btn3 = HAL_GPIO_ReadPin(button3_GPIO_Port, button3_Pin);
+	  playGame();
 
   }
   /* USER CODE END 3 */
